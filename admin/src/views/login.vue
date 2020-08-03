@@ -50,9 +50,11 @@
                             <span class="lbl"> Remember Me</span>
                           </label>
 
-                          <button type="button" class="width-35 pull-right btn btn-sm btn-primary">
+                          <button type="button"
+                                  class="width-35 pull-right btn btn-sm btn-primary"
+                                  @click="login()">
                             <i class="ace-icon fa fa-key"></i>
-                            <span class="bigger-110">Login</span>
+                            <span class="bigger-110">登录</span>
                           </button>
                         </div>
 
@@ -239,9 +241,22 @@
 </template>
 
 <script>
-  $('body').attr('class', 'login-layout light-login');
+
+  // v-on:click="login()"
+  // @click="login()"
+
   export default {
     name: 'login.vue',
+    mounted:function () {
+      $('body').removeClass('no-skin');
+      $('body').attr('class', 'login-layout light-login');
+      console.log("login");
+    },
+    methods: {
+      login() {
+        this.$router.push("/admin")
+      }
+    }
   }
 </script>
 
