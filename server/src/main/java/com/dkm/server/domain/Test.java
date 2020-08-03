@@ -1,4 +1,4 @@
-package com.dkm.system.domain;
+package com.dkm.server.domain;
 
 /**
  * @author dkm

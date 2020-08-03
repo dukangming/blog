@@ -1,6 +1,6 @@
-package com.dkm.system.mapper;
+package com.dkm.server.mapper;
 
-import com.dkm.system.domain.Test;
+import com.dkm.server.domain.Test;
 
 import java.util.List;
 
