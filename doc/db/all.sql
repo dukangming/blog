@@ -1,0 +1,1 @@
+INSERT INTO test (id, name) VALUES (1212,"sadadswqasd")

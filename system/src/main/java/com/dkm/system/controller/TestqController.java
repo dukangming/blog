@@ -10,16 +10,15 @@ import java.util.List;
 
 /**
  * @author dkm
- * @create 2020-08-03 9:54
+ * @create 2020-08-03 11:28
  */
 
 @RestController
-public class TestController {
-
+public class TestqController {
     @Resource
     private TestService testService;
 
-    @RequestMapping("/test")
+    @RequestMapping("/test222")
     public List<Test> test() {
         return testService.list();
     }
