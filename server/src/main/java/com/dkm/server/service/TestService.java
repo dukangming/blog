@@ -1,6 +1,7 @@
 package com.dkm.server.service;
 
 import com.dkm.server.domain.Test;
+import com.dkm.server.domain.TestExample;
 import com.dkm.server.mapper.TestMapper;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,9 @@ public class TestService {
     private TestMapper testMapper;
 
     public List<Test> list() {
-        return testMapper.list();
+        TestExample testExample = new TestExample();
+        testExample.createCriteria().andIdEqualTo("11");
+        testExample.setOrderByClause("id desc");
+        return testMapper.selectByExample(testExample);
     }
 }
