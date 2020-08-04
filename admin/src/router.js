@@ -21,13 +21,16 @@ export default new Router({
         path: "/login",
         component: Login //"/login"对应Login组件
     }, {
-      path: "/admin",
+      path: "/",
+      name:"admin",
       component: Admin,
       children: [{
         path: "welcome",
+        name:"welcome",
         component: Welcome,
       },{
         path: "business/chapter",
+        name:"business/chapter",
         component: Chapter,
       }]
     }]
