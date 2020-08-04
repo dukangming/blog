@@ -137,6 +137,14 @@
       //保存
       save() {
         let _this = this;
+
+        // 保存校验
+        if (!Validator.require(_this.chapter.name, "名称")
+          || !Validator.require(_this.chapter.courseId, "课程ID")
+          || !Validator.length(_this.chapter.courseId, "课程ID", 1, 8)) {
+          return;
+        }
+
         Loading.show();
         //默认传json
         _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/save',_this.chapter).then((response)=>{
