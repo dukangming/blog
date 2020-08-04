@@ -4,6 +4,7 @@ import com.dkm.server.domain.Chapter;
 import com.dkm.server.domain.ChapterExample;
 import com.dkm.server.dto.ChapterDto;
 import com.dkm.server.mapper.ChapterMapper;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,7 @@ public class ChapterService {
     private ChapterMapper chapterMapper;
 
     public List<ChapterDto> list() {
+        PageHelper.startPage(1,5);
         ChapterExample chapterExample = new ChapterExample();
         List<Chapter> chapterList = chapterMapper.selectByExample(chapterExample);
         List<ChapterDto> chapterDtoList = new ArrayList<>();
