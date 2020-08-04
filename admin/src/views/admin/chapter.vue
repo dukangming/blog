@@ -39,7 +39,7 @@
               <i class="ace-icon fa fa-pencil bigger-120"></i>
             </button>
 
-            <button class="btn btn-xs btn-danger">
+            <button v-on:click="del(chapter.id)" class="btn btn-xs btn-danger">
               <i class="ace-icon fa fa-trash-o bigger-120"></i>
             </button>
 
@@ -105,11 +105,13 @@
     },
     methods: {
 
+      //打开编辑面板
       edit(chapter){
         let _this = this;
         _this.chapter = $.extend({},chapter);
         $("#form-modal").modal("show");
       },
+      //打开增加面板
       add() {
         let _this = this;
         _this.chapter = {};
@@ -118,11 +120,13 @@
 
       list(page) {
         let _this = this;
+        Loading.show();
         //默认传json
         _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/list',{
           page: page,
           size: _this.$refs.pagination.size,
         }).then((response)=>{
+          Loading.hide();
             console.log("查询结果：",response);
             let resp = response.data;
             _this.chapters = resp.content.list;
@@ -130,18 +134,43 @@
           })
       },
 
+      //保存
       save() {
         let _this = this;
+        Loading.show();
         //默认传json
         _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/save',_this.chapter).then((response)=>{
+          Loading.hide();
           console.log("保存：",response);
           let resp = response.data;
           if (resp.success){
             $("#form-modal").modal("hide");
             _this.list(1);
+            Toast.success("保存成功！");
           }
         })
-      }
+      },
+
+      //删除
+      del(id) {
+        let _this = this;
+
+        Confirm.show("删除大章后不可恢复，确认删除？",function () {
+          Loading.show();
+          //默认传json
+          _this.$ajax.delete('http://127.0.0.1:9000/business/admin/chapter/delete/'+id).then((response)=>{
+            Loading.hide();
+            console.log("删除：",response);
+            let resp = response.data;
+            if (resp.success){
+              Swal.fire(
+                '删除成功!',
+              )
+              _this.list(1);
+            }
+          })
+        })
+      },
     }
   }
 </script>
