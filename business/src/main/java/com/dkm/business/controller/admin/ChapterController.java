@@ -1,6 +1,7 @@
-package com.dkm.business.controller;
+package com.dkm.business.controller.admin;
 
 import com.dkm.server.domain.Chapter;
+import com.dkm.server.dto.ChapterDto;
 import com.dkm.server.service.ChapterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,13 +15,14 @@ import java.util.List;
  */
 
 @RestController
+@RequestMapping("/admin")
 public class ChapterController {
 
     @Autowired
     public ChapterService chapterService;
 
-    @RequestMapping("/chapter")
-    public List<Chapter> chapter() {
+    @RequestMapping(value="/chapter",produces= {"application/json;charset=UTF-8"})
+    public List<ChapterDto> chapter() {
         return chapterService.list();
     }
 }
