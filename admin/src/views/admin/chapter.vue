@@ -26,64 +26,6 @@
       </thead>
 
       <tbody>
-      <tr>
-        <td>123</td>
-        <td>test</td>
-        <td>1111</td>
-        <td>
-          <div class="hidden-sm hidden-xs btn-group">
-            <button class="btn btn-xs btn-success">
-              <i class="ace-icon fa fa-check bigger-120"></i>
-            </button>
-
-            <button class="btn btn-xs btn-info">
-              <i class="ace-icon fa fa-pencil bigger-120"></i>
-            </button>
-
-            <button class="btn btn-xs btn-danger">
-              <i class="ace-icon fa fa-trash-o bigger-120"></i>
-            </button>
-
-            <button class="btn btn-xs btn-warning">
-              <i class="ace-icon fa fa-flag bigger-120"></i>
-            </button>
-          </div>
-
-          <div class="hidden-md hidden-lg">
-            <div class="inline pos-rel">
-              <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
-                <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
-              </button>
-
-              <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-                <li>
-                  <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                  <span class="blue">
-                                    <i class="ace-icon fa fa-search-plus bigger-120"></i>
-                                  </span>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                  <span class="green">
-                                    <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-                                  </span>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                  <span class="red">
-                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                  </span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </td>
-      </tr>
 
       <tr v-for="chapter in chapters">
         <td>{{chapter.id}}</td>
@@ -146,7 +88,7 @@
       </tbody>
     </table>
 
-    <div class="modal fade" tabindex="-1" role="dialog">
+    <div id="form-modal" class="modal fade" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -158,20 +100,20 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">名称</label>
                 <div class="col-sm-10">
-                  <input class="form-control" placeholder="名称">
+                  <input v-model="chapter.name" class="form-control" placeholder="名称">
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">课程ID</label>
                 <div class="col-sm-10">
-                  <input class="form-control" placeholder="课程ID">
+                  <input v-model="chapter.courseId" class="form-control" placeholder="课程ID">
                 </div>
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button v-on:click="save()" type="button" class="btn btn-primary">Save changes</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
@@ -188,7 +130,8 @@
     components: {Pagination},
     data: function () {
       return{
-        chapters:[]
+        chapter: {},
+        chapters:[],
       }
     },
     mounted:function () {
@@ -202,7 +145,7 @@
     methods: {
       add() {
         let _this = this;
-        $(".modal").modal("show");
+        $("#form-modal").modal("show");
       },
 
       list(page) {
@@ -213,9 +156,23 @@
           size: _this.$refs.pagination.size,
         }).then((response)=>{
             console.log("查询结果：",response);
-            _this.chapters = response.data.list;
-            _this.$refs.pagination.render(page, response.data.total);
+            let resp = response.data;
+            _this.chapters = resp.content.list;
+            _this.$refs.pagination.render(page, resp.content.total);
           })
+      },
+
+      save() {
+        let _this = this;
+        //默认传json
+        _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/save',_this.chapter).then((response)=>{
+          console.log("保存：",response);
+          let resp = response.data;
+          if (resp.success){
+            $("#form-modal").modal("hide");
+            _this.list(1);
+          }
+        })
       }
     }
   }

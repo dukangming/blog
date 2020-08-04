@@ -1,7 +1,10 @@
 package com.dkm.business.controller.admin;
 
+import com.dkm.server.dto.ChapterDto;
 import com.dkm.server.dto.PageDto;
+import com.dkm.server.dto.ResponseDto;
 import com.dkm.server.service.ChapterService;
+import com.dkm.server.util.UuidUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +27,21 @@ public class ChapterController {
     public ChapterService chapterService;
 //@RequestBody接收json
     @RequestMapping(value="/list",produces= {"application/json;charset=UTF-8"})
-    public PageDto chapter(@RequestBody PageDto pageDto) {
+    public ResponseDto chapter(@RequestBody PageDto pageDto) {
         LOG.info("pageDto:{}",pageDto);
+        ResponseDto responseDto = new ResponseDto();
         chapterService.list(pageDto);
-        return pageDto;
+        responseDto.setContent(pageDto);
+        return responseDto;
+    }
+
+    @RequestMapping(value="/save",produces= {"application/json;charset=UTF-8"})
+    public ResponseDto save(@RequestBody ChapterDto chapterDto) {
+
+        LOG.info("chapterDto:{}",chapterDto);
+        ResponseDto responseDto = new ResponseDto();
+        chapterService.save(chapterDto);
+        responseDto.setContent(chapterDto);
+        return responseDto;
     }
 }
