@@ -5,6 +5,7 @@ import com.dkm.server.dto.PageDto;
 import com.dkm.server.dto.ResponseDto;
 import com.dkm.server.service.ChapterService;
 import com.dkm.server.util.UuidUtil;
+import com.dkm.server.util.ValidatorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,12 @@ public class ChapterController {
     @PostMapping(value="/save",produces= {"application/json;charset=UTF-8"})
     public ResponseDto save(@RequestBody ChapterDto chapterDto) {
 
-        LOG.info("chapterDto:{}",chapterDto);
+        // 保存校验
+        ValidatorUtil.require(chapterDto.getName(), "名称");
+        ValidatorUtil.require(chapterDto.getCourseId(), "课程ID");
+        ValidatorUtil.length(chapterDto.getCourseId(), "课程ID", 1, 8);
+
+
         ResponseDto responseDto = new ResponseDto();
         chapterService.save(chapterDto);
         responseDto.setContent(chapterDto);
