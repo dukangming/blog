@@ -105,19 +105,27 @@
     },
     methods: {
 
-      //打开编辑面板
+      /**
+       * 点击【编辑】
+       */
       edit(chapter){
         let _this = this;
         _this.chapter = $.extend({},chapter);
         $("#form-modal").modal("show");
       },
-      //打开增加面板
+
+      /**
+       * 点击【新增】
+       */
       add() {
         let _this = this;
         _this.chapter = {};
         $("#form-modal").modal("show");
       },
 
+      /**
+       * 列表查询
+       */
       list(page) {
         let _this = this;
         Loading.show();
@@ -127,29 +135,27 @@
           size: _this.$refs.pagination.size,
         }).then((response)=>{
           Loading.hide();
-            console.log("查询结果：",response);
             let resp = response.data;
             _this.chapters = resp.content.list;
             _this.$refs.pagination.render(page, resp.content.total);
           })
       },
 
-      //保存
+      /**
+       * 点击【保存】
+       */
       save() {
         let _this = this;
-
         // 保存校验
         if (!Validator.require(_this.chapter.name, "名称")
           || !Validator.require(_this.chapter.courseId, "课程ID")
           || !Validator.length(_this.chapter.courseId, "课程ID", 1, 8)) {
           return;
         }
-
         Loading.show();
         //默认传json
         _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/save',_this.chapter).then((response)=>{
           Loading.hide();
-          console.log("保存：",response);
           let resp = response.data;
           if (resp.success){
             $("#form-modal").modal("hide");
@@ -161,7 +167,9 @@
         })
       },
 
-      //删除
+      /**
+       * 点击【删除】
+       */
       del(id) {
         let _this = this;
 
@@ -170,7 +178,6 @@
           //默认传json
           _this.$ajax.delete('http://127.0.0.1:9000/business/admin/chapter/delete/'+id).then((response)=>{
             Loading.hide();
-            console.log("删除：",response);
             let resp = response.data;
             if (resp.success){
               Swal.fire(

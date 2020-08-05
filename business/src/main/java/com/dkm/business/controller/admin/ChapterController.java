@@ -25,16 +25,22 @@ public class ChapterController {
 
     @Autowired
     public ChapterService chapterService;
-//@RequestBody接收json
+    //@RequestBody接收json 默认接收formdata
+
+    /**
+     * 列表查询
+     */
     @PostMapping(value="/list",produces= {"application/json;charset=UTF-8"})
     public ResponseDto chapter(@RequestBody PageDto pageDto) {
-        LOG.info("pageDto:{}",pageDto);
         ResponseDto responseDto = new ResponseDto();
         chapterService.list(pageDto);
         responseDto.setContent(pageDto);
         return responseDto;
     }
 
+    /**
+     * 保存，id有值时更新，无值时新增
+     */
     @PostMapping(value="/save",produces= {"application/json;charset=UTF-8"})
     public ResponseDto save(@RequestBody ChapterDto chapterDto) {
 
@@ -50,8 +56,11 @@ public class ChapterController {
         return responseDto;
     }
 
+    /**
+     * 删除
+     */
     @DeleteMapping(value="/delete/{id}",produces= {"application/json;charset=UTF-8"})
-    public ResponseDto save(@PathVariable String id) {
+    public ResponseDto delete(@PathVariable String id) {
         LOG.info("id:{}",id);
         ResponseDto responseDto = new ResponseDto();
         chapterService.delete(id);
