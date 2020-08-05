@@ -17,16 +17,14 @@
     <table id="simple-table" class="table  table-bordered table-hover">
       <thead>
       <tr>
-                  <th>id</th>
-          <th>标题</th>
-          <th>课程</th>
-          <th>大章</th>
-          <th>视频</th>
-          <th>时长</th>
-          <th>收费</th>
-          <th>顺序</th>
-          <th>创建时间</th>
-          <th>修改时间</th>
+                <th>id</th>
+        <th>标题</th>
+        <th>课程</th>
+        <th>大章</th>
+        <th>视频</th>
+        <th>时长</th>
+        <th>收费</th>
+        <th>顺序</th>
           <th>操作</th>
       </tr>
       </thead>
@@ -34,16 +32,14 @@
       <tbody>
 
       <tr v-for="section in sections">
-          <td>{{section.id}}</td>
-          <td>{{section.title}}</td>
-          <td>{{section.courseId}}</td>
-          <td>{{section.chapterId}}</td>
-          <td>{{section.video}}</td>
-          <td>{{section.time}}</td>
-          <td>{{section.charge}}</td>
-          <td>{{section.sort}}</td>
-          <td>{{section.createdAt}}</td>
-          <td>{{section.updatedAt}}</td>
+        <td>{{section.id}}</td>
+        <td>{{section.title}}</td>
+        <td>{{section.courseId}}</td>
+        <td>{{section.chapterId}}</td>
+        <td>{{section.video}}</td>
+        <td>{{section.time}}</td>
+        <td>{{section.charge}}</td>
+        <td>{{section.sort}}</td>
         <td>
           <div class="hidden-sm hidden-xs btn-group">
 
@@ -114,6 +110,7 @@
                   <input v-model="section.sort" class="form-control">
                 </div>
               </div>
+
             </form>
           </div>
           <div class="modal-footer">

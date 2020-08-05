@@ -18,7 +18,9 @@
       <thead>
       <tr>
         <#list fieldList as field>
-          <th>${field.nameCn}</th>
+          <#if field.nameHump!="createdAt" && field.nameHump!="updatedAt">
+        <th>${field.nameCn}</th>
+          </#if>
         </#list>
           <th>操作</th>
       </tr>
@@ -28,7 +30,13 @@
 
       <tr v-for="${domain} in ${domain}s">
         <#list fieldList as field>
-          <td>{{${domain}.${field.nameHump}}}</td>
+          <#if field.nameHump!="createdAt" && field.nameHump!="updatedAt">
+            <#if field.enums>
+        <td>{{${field.enumsConst} | optionKV(${domain}.${field.nameHump})}}</td>
+            <#else>
+        <td>{{${domain}.${field.nameHump}}}</td>
+            </#if>
+          </#if>
         </#list>
         <td>
           <div class="hidden-sm hidden-xs btn-group">
@@ -79,6 +87,7 @@
                   </#if>
                 </#if>
               </#list>
+
             </form>
           </div>
           <div class="modal-footer">
