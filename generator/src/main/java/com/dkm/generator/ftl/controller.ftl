@@ -1,4 +1,4 @@
-package com.dkm.business.controller.admin;
+package com.dkm.${module}.controller.admin;
 
 import com.dkm.server.dto.${Domain}Dto;
 import com.dkm.server.dto.PageDto;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 public class ${Domain}Controller {
 
     private static final Logger LOG = LoggerFactory.getLogger(${Domain}Controller.class);
-    public static final String BUSINESS_NAME = "大章";
+    public static final String BUSINESS_NAME = "${tableNameCn}";
 
     @Autowired
     public ${Domain}Service ${domain}Service;

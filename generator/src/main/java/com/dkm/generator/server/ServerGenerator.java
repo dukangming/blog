@@ -20,9 +20,13 @@ public class ServerGenerator {
 
         String Domain = "Section";
         String domain = "section";
+        String tableNameCn = "小节";
+        String module = MODULE;
         HashMap<String, Object> map = new HashMap<>();
         map.put("Domain",Domain);
         map.put("domain",domain);
+        map.put("tableNameCn", tableNameCn);
+        map.put("module", module);
 
 
         // 生成service
