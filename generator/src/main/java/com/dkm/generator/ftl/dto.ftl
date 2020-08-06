@@ -1,18 +1,22 @@
 package com.dkm.server.dto;
 
 <#list typeSet as type>
-<#if type=='Date'>
+    <#if type=='Date'>
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
-</#if>
-<#if type=='BigDecimal'>
+    </#if>
+    <#if type=='BigDecimal'>
 import java.math.BigDecimal;
-</#if>
+    </#if>
 </#list>
+
+/**
+ * @author dkm
+ */
 
 public class ${Domain}Dto {
 
-    <#list fieldList as field>
+<#list fieldList as field>
     /**
      * ${field.comment}
      */
@@ -21,8 +25,8 @@ public class ${Domain}Dto {
     </#if>
     private ${field.javaType} ${field.nameHump};
 
-    </#list>
-    <#list fieldList as field>
+</#list>
+<#list fieldList as field>
     public ${field.javaType} get${field.nameBigHump}() {
         return ${field.nameHump};
     }
@@ -31,7 +35,7 @@ public class ${Domain}Dto {
         this.${field.nameHump} = ${field.nameHump};
     }
 
-    </#list>
+</#list>
 
     @Override
     public String toString() {
@@ -39,9 +43,9 @@ public class ${Domain}Dto {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        <#list fieldList as field>
+<#list fieldList as field>
         sb.append(", ${field.nameHump}=").append(${field.nameHump});
-        </#list>
+</#list>
         sb.append("]");
         return sb.toString();
     }
