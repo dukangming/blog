@@ -31,7 +31,7 @@ public class ChapterController {
      * 列表查询
      */
     @PostMapping(value="/list",produces= {"application/json;charset=UTF-8"})
-    public ResponseDto chapter(@RequestBody PageDto pageDto) {
+    public ResponseDto list(@RequestBody PageDto pageDto) {
         ResponseDto responseDto = new ResponseDto();
         chapterService.list(pageDto);
         responseDto.setContent(pageDto);

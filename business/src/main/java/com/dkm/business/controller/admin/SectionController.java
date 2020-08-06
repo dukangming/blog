@@ -31,7 +31,7 @@ public class SectionController {
      * 列表查询
      */
     @PostMapping(value="/list",produces= {"application/json;charset=UTF-8"})
-    public ResponseDto section(@RequestBody PageDto pageDto) {
+    public ResponseDto list(@RequestBody PageDto pageDto) {
         ResponseDto responseDto = new ResponseDto();
         sectionService.list(pageDto);
         responseDto.setContent(pageDto);

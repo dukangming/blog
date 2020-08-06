@@ -4,6 +4,7 @@ import com.dkm.server.domain.Section;
 import com.dkm.server.domain.SectionExample;
 import com.dkm.server.dto.SectionDto;
 import com.dkm.server.dto.PageDto;
+import com.dkm.server.enums.SectionChargeEnum;
 import com.dkm.server.mapper.SectionMapper;
 import com.dkm.server.util.CopyUtil;
 import com.dkm.server.util.UuidUtil;
@@ -67,6 +68,7 @@ public class SectionService {
 
 
         section.setId(UuidUtil.getShortUuid());
+        section.setCharge(SectionChargeEnum.CHARGE.getCode());
 
         sectionMapper.insert(section);
     }
