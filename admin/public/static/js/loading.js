@@ -13,8 +13,8 @@ Loading = {
   },
   hide: function () {
     // 本地查询速度太快，loading显示一瞬间，故意做个延迟
-    setTimeout(function () {
-      $.unblockUI();
-    }, 500)
+    // setTimeout(function () {
+    //   $.unblockUI();
+    // }, 500)
   }
 };
