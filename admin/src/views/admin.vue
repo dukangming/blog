@@ -376,11 +376,11 @@
             <b class="arrow"></b>
 
             <ul class="submenu">
-              <li class="">
-                <a href="tables.html">
+              <li class="" id="system-user-sidebar">
+                <router-link to="/system/user">
                   <i class="menu-icon fa fa-caret-right"></i>
                   用户管理
-                </a>
+                </router-link>
 
                 <b class="arrow"></b>
               </li>
@@ -397,7 +397,7 @@
           </li>
 
 
-          <li class="active open">
+          <li class="">
             <a href="#" class="dropdown-toggle">
               <i class="menu-icon fa fa-list"></i>
               <span class="menu-text"> 业务管理 </span>
@@ -409,7 +409,7 @@
 
             <ul class="submenu">
 
-              <li class="active" id="business-course-sidebar">
+              <li class="" id="business-course-sidebar">
                 <router-link to="/business/course">
                   <i class="menu-icon fa fa-caret-right"></i>
                   课程管理
@@ -418,7 +418,7 @@
                 <b class="arrow"></b>
               </li>
 
-              <li class="active" id="business-chapter-sidebar">
+              <li class="" id="business-chapter-sidebar">
                 <router-link to="/business/chapter">
                   <i class="menu-icon fa fa-caret-right"></i>
                   大章管理
@@ -427,7 +427,7 @@
                 <b class="arrow"></b>
               </li>
 
-              <li class="active" id="business-section-sidebar">
+              <li class="" id="business-section-sidebar">
                 <router-link to="/business/section">
                   <i class="menu-icon fa fa-caret-right"></i>
                   小节管理
@@ -596,6 +596,8 @@
       $('body').attr('class', 'no-skin');
       // console.log("admin");
       _this.activeSidebar(_this.$route.name.replace("/", "-") + "-sidebar");
+
+      $.getScript('/ace/assets/js/ace.min.js');
     },
     watch: {
       $route: {

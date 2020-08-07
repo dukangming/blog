@@ -6,6 +6,7 @@ import Welcome from "./views/admin/welcome.vue"
 import Course from "./views/admin/course.vue"
 import Chapter from "./views/admin/chapter.vue"
 import Section from "./views/admin/section.vue"
+import User from "./views/admin/user.vue"
 
 Vue.use(Router);
 
@@ -20,9 +21,12 @@ export default new Router({
         path: "",
         redirect: "/login",
     }, {
-        path: "/login",
+        path: "",
         component: Login //"/login"对应Login组件
     }, {
+      path: "/login",
+      component: Login //"/login"对应Login组件
+    },{
       path: "/",
       name:"admin",
       component: Admin,
@@ -42,6 +46,10 @@ export default new Router({
         path: "business/section",
         name:"business/section",
         component: Section,
+      },{
+        path: "system/user",
+        name:"system/user",
+        component: User,
       }]
     }]
 })
