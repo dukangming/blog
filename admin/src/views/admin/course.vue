@@ -274,3 +274,10 @@
     }
   }
 </script>
+
+axios.get("http://xxx.com/xxx/xxx/xxx?",{
+                        params:{id:this.kemuid},
+                        headers:{token:Cookies.get('token'), platform: 'web'}
+                    }).then((res)=>{
+                        console.log(res)
+                })
